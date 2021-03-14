@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MyTopController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\ResultContrller;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'spotify'], function() {
+Route::group(['prefix' => 'search'], function() {
+    Route::resource('myTop', MyTopController::class);
     Route::resource('playlist', PlaylistController::class);
+});
+
+Route::group(['prefix' => 'result'], function() {
+    Route::resource('/', ResultContrller::class);
 });

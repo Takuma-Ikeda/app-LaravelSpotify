@@ -10,7 +10,7 @@ use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\SpotifyWebAPIAuthException;
 use SpotifyWebAPI\SpotifyWebAPIException;
 
-class PlaylistController extends Controller
+class MyTopController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        // http://localhost/spotify/playlist/index
+        // http://localhost/spotify/myTop/index
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Spotify;
+use App\Services\SpotifyService;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use SpotifyWebAPI\Request as SpotifyRequest;
@@ -10,16 +12,32 @@ use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\SpotifyWebAPIAuthException;
 use SpotifyWebAPI\SpotifyWebAPIException;
 
-class PlaylistController extends Controller
+class ResultContrller extends Controller
 {
+
+    private $service;
+
+    public function __construct(SpotifyService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        // http://localhost/spotify/playlist/index
+        Spotify::auth($req->input('code'));
+        $session = Spotify::getSpotifySession();
+        $api = Spotify::getSpotifyWebAPI();
+
+        $top = $api->getMyTop('tracks', ['limit' => 10]);
+        dd($top);
+
+        // $myProfile = $api->me();
+        // dd($myProfile);
     }
 
     /**
