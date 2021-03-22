@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Web;
 use App\Facades\Spotify;
 use App\Services\SpotifyService;
 use Illuminate\Http\Request;
@@ -12,28 +13,15 @@ use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\SpotifyWebAPIAuthException;
 use SpotifyWebAPI\SpotifyWebAPIException;
 
-class PlaylistController extends Controller
+class GenreSeedsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index()
     {
-        // http://localhost/playlist/index
-        // Spotify::auth($req->input('code'));
-        // $session = Spotify::getSpotifySession();
-        // $api = Spotify::getSpotifyWebAPI();
-
-        // $seeds = $api->getGenreSeeds();
-        // // dd($seeds);
-
-        // $top = $api->getMyTop('tracks', ['limit' => 10]);
-        // // dd($top);
-
-        // // $myProfile = $api->me();
-        // // dd($myProfile);
     }
 
     /**
@@ -41,9 +29,11 @@ class PlaylistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $req)
     {
-        //
+        // http://localhost/genre/create/
+        session(['web' => Web::GenreCreate]);
+        Spotify::init($req);
     }
 
     /**

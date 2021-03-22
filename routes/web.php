@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyTopController;
+use App\Http\Controllers\GenreSeedsController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ResultContrller;
 
@@ -24,11 +25,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'search'], function() {
-    Route::resource('myTop', MyTopController::class);
-    Route::resource('playlist', PlaylistController::class);
-});
+// Route::group(['prefix' => 'search'], function() {
+//     Route::resource('myTop', MyTopController::class);
+// });
 
 Route::group(['prefix' => 'result'], function() {
     Route::resource('/', ResultContrller::class);
+});
+
+Route::group(['prefix' => 'playlist'], function() {
+    Route::resource('/', PlaylistController::class);
+});
+
+Route::group(['prefix' => 'genre'], function() {
+    Route::resource('/', GenreSeedsController::class);
 });

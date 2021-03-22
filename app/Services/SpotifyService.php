@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Enums\Web;
+use App\Models\Genre;
+use Illuminate\Http\Request;
 use SpotifyWebAPI\Request as SpotifyRequest;
 use SpotifyWebAPI\Session as SpotifySession;
 use SpotifyWebAPI\SpotifyWebAPI;
@@ -25,7 +28,24 @@ class SpotifyService
         return $this->session;
     }
 
-    public function auth(?string $code)
+    public function init(Request $req): SpotifyWebAPI
+    {
+        $this->auth($req->input('code'));
+        $this->getSpotifySession();
+        return $this->getSpotifyWebAPI();
+    }
+
+    public function execute(SpotifyWebAPI $api, string $web): void
+    {
+        switch ($web) {
+            case Web::GenreCreate:
+                $genre = new Genre();
+                $genre->createBySeeds($api);
+                break;
+        }
+    }
+
+    private function auth(?string $code)
     {
         if (!isset($code)) {
             $location = $this->createSpotifySession()->getAuthorizeUrl([

@@ -17,11 +17,6 @@ class ResultContrller extends Controller
 
     private $service;
 
-    public function __construct(SpotifyService $service)
-    {
-        $this->service = $service;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,15 +24,11 @@ class ResultContrller extends Controller
      */
     public function index(Request $req)
     {
-        Spotify::auth($req->input('code'));
-        $session = Spotify::getSpotifySession();
-        $api = Spotify::getSpotifyWebAPI();
-
-        $top = $api->getMyTop('tracks', ['limit' => 10]);
-        dd($top);
-
-        // $myProfile = $api->me();
-        // dd($myProfile);
+        $api = Spotify::init($req);
+        if (session()->has('web')) {
+            Spotify::execute($api, session('web'));
+        }
+        session()->forget('web');
     }
 
     /**
