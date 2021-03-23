@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Enums\Web;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SpotifyWebAPI\Request as SpotifyRequest;
 use SpotifyWebAPI\Session as SpotifySession;
 use SpotifyWebAPI\SpotifyWebAPI;
@@ -39,25 +40,15 @@ class SpotifyService
     {
         $result = [];
         switch ($web) {
-            case Web::PlaylistStore:
-                $recommendations = $api->getRecommendations([
-                    'limit'        => $data['limit'],
-                    'seed_artists' => $data['seed_artists'],
-                    'seed_genres'  => $data['seed_genres'],
-                    'seed_tracks'  => $data['seed_tracks'],
-                    'min_tempo'    => $data['min_tempo'],
-                    'max_tempo'    => $data['max_tempo'],
-                ]);
+            case Web::RecommendationStore:
+                $result = $this->getRecommendations($data, $api);
+                $userId = Auth::id();
 
-                $tracks = $recommendations->tracks;
-                foreach ($tracks as $t) {
-                    $result[] = [
-                        'song' => $t->name,
-                        'uri'  => $t->uri,
-                    ];
-                }
-
-                // dd($recommendations);
+                /*
+                 * このタイミングで
+                 * conditions + user_id
+                 * recommendations + condition_id
+                 */
 
                 break;
             case Web::GenreCreate:
@@ -109,5 +100,44 @@ class SpotifyService
             config('spotify.yourClientSecret'),
             config('spotify.yourRedirectUri')
         );
+    }
+
+    private function getRecommendations(array $data, SpotifyWebAPI $api): array
+    {
+        $result = [];
+        $seedArtists = $data['seed_artists'];
+        $seedTracks = $data['seed_tracks'];
+
+        $seedArtists = $this->parseSeeds($seedArtists, 'spotify:artist:');
+        $seedTracks = $this->parseSeeds($seedTracks, 'spotify:track:');
+
+        $recommendations = $api->getRecommendations([
+            'limit'        => $data['limit'],
+            'seed_artists' => $seedArtists,
+            'seed_genres'  => $data['seed_genres'],
+            'seed_tracks'  => $seedTracks,
+            'min_tempo'    => $data['min_tempo'],
+            'max_tempo'    => $data['max_tempo'],
+        ]);
+
+        $tracks = $recommendations->tracks;
+        foreach ($tracks as $t) {
+            $result[] = [
+                'song' => $t->name,
+                'uri'  => $t->uri,
+            ];
+        }
+        return $result;
+    }
+
+    private function parseSeeds(array $seeds, string $type): array
+    {
+        foreach ($seeds as $index => $seed) {
+            if (strpos($seed, $type) !== false) {
+                $seed = str_replace($type, '', $seed);
+                $seeds[$index] = $seed;
+            }
+        }
+        return $seeds;
     }
 }

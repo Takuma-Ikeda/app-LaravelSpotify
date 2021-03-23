@@ -47,40 +47,7 @@ class PlaylistController extends Controller
      */
     public function store(Request $req)
     {
-        $seedArtists = [];
-        $seedTracks = [];
-
-        foreach (range(1, 5) as $i) {
-            $seedArtists[] = $req->input('seed_artists_0' . $i);
-            $seedTracks[] = $req->input('seed_tracks_0' . $i);
-        }
-
-        foreach ($seedArtists as $index => $seed) {
-            if(strpos($seed, 'spotify:artist:') !== false){
-                $seed = str_replace('spotify:artist:', '', $seed);
-                $seedArtists[$index] = $seed;
-            }
-        }
-
-        foreach ($seedTracks as $index => $seed) {
-            if(strpos($seed, 'spotify:track:') !== false){
-                $seed = str_replace('spotify:track:', '', $seed);
-                $seedTracks[$index] = $seed;
-            }
-        }
-
-        session([
-            'web'  => Web::PlaylistStore,
-            'data' => [
-                'seed_genres'  => $req->input('seed_genres'),
-                'seed_artists' => $seedArtists,
-                'seed_tracks'  => $seedTracks,
-                'limit'        => $req->input('limit'),
-                'min_tempo'    => $req->input('min_tempo'),
-                'max_tempo'    => $req->input('max_tempo'),
-            ],
-        ]);
-        Spotify::init($req);
+        //
     }
 
     /**

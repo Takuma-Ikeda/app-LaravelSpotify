@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GenreSeedsController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\RecomendationController;
 use App\Http\Controllers\ResultContrller;
 
 /*
@@ -19,12 +20,21 @@ use App\Http\Controllers\ResultContrller;
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('/', PlaylistController::class, [
+    Route::resource('/', RecomendationController::class, [
         'names' => [
-            'create' => 'playlist.create',
-            'store'  => 'playlist.store',
+            'create' => 'recomendation.create',
+            'store'  => 'recomendation.store',
         ]
     ]);
+
+    Route::group(['prefix' => 'playlist'], function() {
+        Route::resource('/', PlaylistController::class, [
+            'names' => [
+                'create' => 'playlist.create',
+                'store'  => 'playlist.store',
+            ]
+        ]);
+    });
 
     Route::group(['prefix' => 'result'], function() {
         Route::resource('/', ResultContrller::class);

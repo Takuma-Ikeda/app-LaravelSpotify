@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('playlist.condition') }}</div>
+                <div class="card-header">{{ __('recomendation.condition') }}</div>
 
                 <div class="card-body">
                     {{Form::open(['route' => ['recomendation.store']])}}

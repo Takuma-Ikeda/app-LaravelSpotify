@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('playlist.result') }}</div>
+                <div class="card-header">{{ __('recomendation.result') }}</div>
 
                 <div class="card-body">
-                    <a href="{{ url('/playlist') }}"><{{ __('playlist.condition') }}</a>
+                    <p><a href="{{ url('/playlist') }}">back</a></p>
 
                     <table class="table table-striped">
                         <thead>

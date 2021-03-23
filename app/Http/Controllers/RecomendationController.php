@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Web;
 use App\Facades\Spotify;
+use App\Models\Genre;
 use App\Services\SpotifyService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use SpotifyWebAPI\Request as SpotifyRequest;
 use SpotifyWebAPI\Session as SpotifySession;
@@ -13,26 +14,20 @@ use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\SpotifyWebAPIAuthException;
 use SpotifyWebAPI\SpotifyWebAPIException;
 
-class ResultContrller extends Controller
+class RecomendationController extends Controller
 {
-
-    private $service;
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index()
     {
-        $api = Spotify::init($req);
-
-        if (session()->has('web') && session()->has('data')) {
-            $result = Spotify::execute($api, session('web'), session('data'));
+        $genres = [];
+        foreach (Genre::all() as $genre) {
+            $genres[] = $genre->name;
         }
-        session()->forget('web');
-        session()->forget('data');
-        return view('result', compact('result'));
+        return view('recomendation', compact('genres'));
     }
 
     /**
@@ -40,9 +35,8 @@ class ResultContrller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $req)
     {
-        //
     }
 
     /**
@@ -51,9 +45,28 @@ class ResultContrller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $seedArtists = [];
+        $seedTracks = [];
+
+        foreach (range(1, 5) as $i) {
+            $seedArtists[] = $req->input('seed_artists_0' . $i);
+            $seedTracks[] = $req->input('seed_tracks_0' . $i);
+        }
+
+        session([
+            'web'  => Web::RecommendationStore,
+            'data' => [
+                'seed_genres'  => $req->input('seed_genres'),
+                'seed_artists' => $seedArtists,
+                'seed_tracks'  => $seedTracks,
+                'limit'        => $req->input('limit'),
+                'min_tempo'    => $req->input('min_tempo'),
+                'max_tempo'    => $req->input('max_tempo'),
+            ],
+        ]);
+        Spotify::init($req);
     }
 
     /**
@@ -85,7 +98,7 @@ class ResultContrller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
         //
     }
