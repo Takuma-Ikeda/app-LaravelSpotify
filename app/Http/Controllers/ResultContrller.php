@@ -25,10 +25,13 @@ class ResultContrller extends Controller
     public function index(Request $req)
     {
         $api = Spotify::init($req);
-        if (session()->has('web')) {
-            Spotify::execute($api, session('web'));
+
+        if (session()->has('web') && session()->has('data')) {
+            $result = Spotify::execute($api, session('web'), session('data'));
         }
         session()->forget('web');
+        session()->forget('data');
+        return view('result', compact('result'));
     }
 
     /**

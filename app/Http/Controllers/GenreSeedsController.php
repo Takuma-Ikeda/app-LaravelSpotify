@@ -33,6 +33,7 @@ class GenreSeedsController extends Controller
     {
         // http://localhost/genre/create/
         session(['web' => Web::GenreCreate]);
+        session(['data' => []]);
         Spotify::init($req);
     }
 

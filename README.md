@@ -38,3 +38,18 @@ composer require guzzlehttp/guzzle
 composer require jwilsson/spotify-web-api-php
 ```
 
+### laravel-enum
+
+- https://github.com/BenSampo/laravel-enum
+
+```sh
+composer require bensampo/laravel-enum
+```
+
+### LaravelCollective
+
+- https://github.com/LaravelCollective/docs
+
+```sh
+composer require "laravelcollective/html"
+```

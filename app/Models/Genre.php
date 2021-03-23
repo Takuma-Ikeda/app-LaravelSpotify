@@ -19,7 +19,8 @@ class Genre extends Model
         'name' => 'string',
     ];
 
-    public function createBySeeds(SpotifyWebAPI $api) {
+    public function createBySeeds(SpotifyWebAPI $api): void
+    {
         $genres = $api->getGenreSeeds()->genres;
         foreach ($genres as $seed) {
             self::create([

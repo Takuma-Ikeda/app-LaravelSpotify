@@ -35,14 +35,37 @@ class SpotifyService
         return $this->getSpotifyWebAPI();
     }
 
-    public function execute(SpotifyWebAPI $api, string $web): void
+    public function execute(SpotifyWebAPI $api, string $web, array $data = []): array
     {
+        $result = [];
         switch ($web) {
+            case Web::PlaylistStore:
+                $recommendations = $api->getRecommendations([
+                    'limit'        => $data['limit'],
+                    'seed_artists' => $data['seed_artists'],
+                    'seed_genres'  => $data['seed_genres'],
+                    'seed_tracks'  => $data['seed_tracks'],
+                    'min_tempo'    => $data['min_tempo'],
+                    'max_tempo'    => $data['max_tempo'],
+                ]);
+
+                $tracks = $recommendations->tracks;
+                foreach ($tracks as $t) {
+                    $result[] = [
+                        'song' => $t->name,
+                        'uri'  => $t->uri,
+                    ];
+                }
+
+                // dd($recommendations);
+
+                break;
             case Web::GenreCreate:
                 $genre = new Genre();
                 $genre->createBySeeds($api);
                 break;
         }
+        return $result;
     }
 
     private function auth(?string $code)

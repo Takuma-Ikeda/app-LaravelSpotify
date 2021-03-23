@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Web;
 use App\Facades\Spotify;
+use App\Models\Genre;
 use App\Services\SpotifyService;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -19,21 +21,13 @@ class PlaylistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index()
     {
-        // http://localhost/playlist/index
-        // Spotify::auth($req->input('code'));
-        // $session = Spotify::getSpotifySession();
-        // $api = Spotify::getSpotifyWebAPI();
-
-        // $seeds = $api->getGenreSeeds();
-        // // dd($seeds);
-
-        // $top = $api->getMyTop('tracks', ['limit' => 10]);
-        // // dd($top);
-
-        // // $myProfile = $api->me();
-        // // dd($myProfile);
+        $genres = [];
+        foreach (Genre::all() as $genre) {
+            $genres[] = $genre->name;
+        }
+        return view('playlist', compact('genres'));
     }
 
     /**
@@ -41,9 +35,8 @@ class PlaylistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $req)
     {
-        //
     }
 
     /**
@@ -52,9 +45,42 @@ class PlaylistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $seedArtists = [];
+        $seedTracks = [];
+
+        foreach (range(1, 5) as $i) {
+            $seedArtists[] = $req->input('seed_artists_0' . $i);
+            $seedTracks[] = $req->input('seed_tracks_0' . $i);
+        }
+
+        foreach ($seedArtists as $index => $seed) {
+            if(strpos($seed, 'spotify:artist:') !== false){
+                $seed = str_replace('spotify:artist:', '', $seed);
+                $seedArtists[$index] = $seed;
+            }
+        }
+
+        foreach ($seedTracks as $index => $seed) {
+            if(strpos($seed, 'spotify:track:') !== false){
+                $seed = str_replace('spotify:track:', '', $seed);
+                $seedTracks[$index] = $seed;
+            }
+        }
+
+        session([
+            'web'  => Web::PlaylistStore,
+            'data' => [
+                'seed_genres'  => $req->input('seed_genres'),
+                'seed_artists' => $seedArtists,
+                'seed_tracks'  => $seedTracks,
+                'limit'        => $req->input('limit'),
+                'min_tempo'    => $req->input('min_tempo'),
+                'max_tempo'    => $req->input('max_tempo'),
+            ],
+        ]);
+        Spotify::init($req);
     }
 
     /**
@@ -86,7 +112,7 @@ class PlaylistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
         //
     }
