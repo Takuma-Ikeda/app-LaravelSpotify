@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+<title>{{ __('recomendation.result') }}</title>
+@endsection
+
 @section('content')
 <div class="container">
 
