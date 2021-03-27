@@ -118,6 +118,7 @@ class SpotifyService
             'seed_tracks'  => $seedTracks,
             'min_tempo'    => $data['min_tempo'],
             'max_tempo'    => $data['max_tempo'],
+            'mode'         => $data['mode'],
         ]);
 
         $tracks = $recommendations->tracks;

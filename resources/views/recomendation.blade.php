@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">{{ __('recomendation.result') }}</div>
                 <div class="card-body">
-                    <p><a href="{{ url('/playlist') }}">back</a></p>
+                    <p><a href="{{ url('/') }}">back</a></p>
                     <table class="table table-striped">
                         <thead>
                             <tr>

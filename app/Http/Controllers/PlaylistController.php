@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\Web;
 use App\Facades\Spotify;
+use App\Http\Requests\ResultRequest;
 use App\Models\Genre;
 use App\Services\SpotifyService;
 use Carbon\Carbon;
@@ -22,20 +23,11 @@ class PlaylistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index(ResultRequest $req)
     {
-        $result = $req->input('result');
+        $result = $req->validated()['result'];
         $playlistUri = $result['playlist_uri'];
         return view('playlist', compact('playlistUri'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $req)
-    {
     }
 
     /**
@@ -65,40 +57,6 @@ class PlaylistController extends Controller
             ],
         ]);
         Spotify::init($req);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $req, $id)
-    {
-        //
     }
 
     /**

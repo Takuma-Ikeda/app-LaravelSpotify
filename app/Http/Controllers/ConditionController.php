@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\Web;
 use App\Facades\Spotify;
+use App\Http\Requests\ConditionRequest;
 use App\Models\Genre;
 use App\Services\SpotifyService;
 use Illuminate\Http\Request;
@@ -31,86 +32,37 @@ class ConditionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $req)
-    {
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $req)
+    public function store(ConditionRequest $req)
     {
         $seedArtists = [];
         $seedTracks = [];
 
         foreach (range(1, 5) as $i) {
-            $seedArtists[] = $req->input('seed_artists_0' . $i);
-            $seedTracks[] = $req->input('seed_tracks_0' . $i);
+            $seedArtists[] = $req->validated()['seed_artists_' . $i];
+            $seedTracks[] = $req->validated()['seed_tracks_' . $i];
         }
+
+        // 配列の index を詰めておく
+        $seedArtists = (array_filter($seedArtists));
+        $seedTracks = (array_filter($seedTracks));
 
         session([
             'web'  => Web::RecommendationStore,
             'data' => [
-                'seed_genres'  => $req->input('seed_genres'),
+                'seed_genres'  => $req->validated()['seed_genres'],
                 'seed_artists' => $seedArtists,
                 'seed_tracks'  => $seedTracks,
-                'limit'        => $req->input('limit'),
-                'min_tempo'    => $req->input('min_tempo'),
-                'max_tempo'    => $req->input('max_tempo'),
+                'limit'        => $req->validated()['limit'],
+                'min_tempo'    => $req->validated()['min_tempo'],
+                'max_tempo'    => $req->validated()['max_tempo'],
+                'mode'         => $req->validated()['modes'],
             ],
         ]);
         Spotify::init($req);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $req, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

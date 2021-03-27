@@ -16,6 +16,12 @@
                             <p class="text-info">Seed Genres・Seed Artists・Seed Tracks を最大 5 つまで組み合わせてください</p>
                         </div>
 
+                        @if ($errors->has('seed'))
+                            <div class="form-group col-sm-12">
+                                <p class="error-message text-danger">{{ $errors->first('seed') }}</p>
+                            </div>
+                        @endif
+
                         {{-- Seed Genres --}}
 
                         <div class="form-group col-sm-12">
@@ -35,43 +41,43 @@
                         {{-- Seed Artists --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('seed_artists_01','Seed Artists', [])}}
+                            {{Form::label('seed_artists_1','Seed Artists', [])}}
                             <span class="badge badge-danger">必須</span>
                             <small id="seed_artists_help" class="form-text text-muted">
                                 アーティスト名 Spotify URI
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_01', 'spotify:artist:61VIpi1GmB7bTL3DCGWSlm', [
-                                'id'          => 'seed_artists_01',
+                            {{Form::text('seed_artists_1', 'spotify:artist:61VIpi1GmB7bTL3DCGWSlm', [
+                                'id'          => 'seed_artists_1',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:61VIpi1GmB7bTL3DCGWSlm',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_02', 'spotify:artist:4YXWn3AKqmiHMai9dZWuWK', [
-                                'id'          => 'seed_artists_02',
+                            {{Form::text('seed_artists_2', 'spotify:artist:4YXWn3AKqmiHMai9dZWuWK', [
+                                'id'          => 'seed_artists_2',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:4YXWn3AKqmiHMai9dZWuWK',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_03', 'spotify:artist:7nDfh01E30OkhgsPKSQzCx', [
-                                'id'          => 'seed_artists_03',
+                            {{Form::text('seed_artists_3', 'spotify:artist:7nDfh01E30OkhgsPKSQzCx', [
+                                'id'          => 'seed_artists_3',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:7nDfh01E30OkhgsPKSQzCx',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_04', 'spotify:artist:4frHeZ2ummtLwkuV7QohYp', [
-                                'id'          => 'seed_artists_04',
+                            {{Form::text('seed_artists_4', 'spotify:artist:4frHeZ2ummtLwkuV7QohYp', [
+                                'id'          => 'seed_artists_4',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:4frHeZ2ummtLwkuV7QohYp',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_05', 'spotify:artist:0Gvw849iPccKI428txR3yP', [
-                                'id'          => 'seed_artists_05',
+                            {{Form::text('seed_artists_5', 'spotify:artist:0Gvw849iPccKI428txR3yP', [
+                                'id'          => 'seed_artists_5',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:0Gvw849iPccKI428txR3yP',
                             ])}}
@@ -80,47 +86,95 @@
                         {{-- Seed Tracks --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('seed_tracks_01', 'Seed Tracks', [])}}
+                            {{Form::label('seed_tracks_1', 'Seed Tracks', [])}}
                             <span class="badge badge-danger">必須</span>
                             <small id="seed_tracks_help" class="form-text text-muted">
                                 曲名 Spotify URI
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_01', 'spotify:track:6ZtpesFDroMHMM8CG5LlhZ', [
-                                'id'          => 'seed_tracks_01',
+                            {{Form::text('seed_tracks_1', 'spotify:track:6ZtpesFDroMHMM8CG5LlhZ', [
+                                'id'          => 'seed_tracks_1',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:6ZtpesFDroMHMM8CG5LlhZ',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_02', 'spotify:track:2yA4JMxbVHBBzMbKmVHH1s', [
-                                'id'          => 'seed_tracks_02',
+                            {{Form::text('seed_tracks_2', 'spotify:track:2yA4JMxbVHBBzMbKmVHH1s', [
+                                'id'          => 'seed_tracks_2',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:2yA4JMxbVHBBzMbKmVHH1s',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_03', 'spotify:track:0QMqvJp8SZsjmGQJnMD9N0', [
-                                'id'          => 'seed_tracks_03',
+                            {{Form::text('seed_tracks_3', 'spotify:track:0QMqvJp8SZsjmGQJnMD9N0', [
+                                'id'          => 'seed_tracks_3',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:0QMqvJp8SZsjmGQJnMD9N0',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_04', 'spotify:track:5HkpiHbmgH87yJwIGlS6ye', [
-                                'id'          => 'seed_tracks_04',
+                            {{Form::text('seed_tracks_4', 'spotify:track:5HkpiHbmgH87yJwIGlS6ye', [
+                                'id'          => 'seed_tracks_4',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:5HkpiHbmgH87yJwIGlS6ye',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_05', 'spotify:track:6BURi8BvCkyFUKMQnmxjFg', [
-                                'id'          => 'seed_tracks_05',
+                            {{Form::text('seed_tracks_5', 'spotify:track:6BURi8BvCkyFUKMQnmxjFg', [
+                                'id'          => 'seed_tracks_5',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:6BURi8BvCkyFUKMQnmxjFg',
                             ])}}
                         </div>
+
+                        {{--
+                            ※ Option の種類
+                            limit: 実装済み
+                            market
+                            min_acousticness
+                            max_acousticness
+                            target_acousticness
+                            min_danceability
+                            max_danceability
+                            target_danceability
+                            min_duration_ms
+                            max_duration_ms
+                            target_duration_ms
+                            min_energy
+                            max_energy
+                            target_energy
+                            min_instrumentalness
+                            max_instrumentalness
+                            target_instrumentalness
+                            min_key
+                            max_key
+                            target_key
+                            min_liveness
+                            max_liveness
+                            target_liveness
+                            min_loudness
+                            max_loudness
+                            target_loudness
+                            min_mode
+                            max_mode
+                            target_mode
+                            min_popularity
+                            max_popularity
+                            target_popularity
+                            min_speechiness
+                            max_speechiness
+                            target_speechiness
+                            min_tempo: 実装済み
+                            max_tempo: 実装済み
+                            target_tempo
+                            min_time_signature
+                            max_time_signature
+                            target_time_signature
+                            min_valence
+                            max_valence
+                            target_valence
+                        --}}
 
                         {{-- Limit --}}
 
@@ -137,6 +191,11 @@
                                 'class' => 'form-control',
                             ])}}
                         </div>
+                        @if ($errors->has('limit'))
+                            <div class="form-group col-sm-12">
+                                <p class="error-message text-danger">{{ $errors->first('limit') }}</p>
+                            </div>
+                        @endif
 
                         {{-- Min Tempo --}}
 
@@ -154,6 +213,11 @@
                                 'placeholder' => '80',
                             ])}}
                         </div>
+                        @if ($errors->has('min_tempo'))
+                            <div class="form-group col-sm-12">
+                                <p class="error-message text-danger">{{ $errors->first('min_tempo') }}</p>
+                            </div>
+                        @endif
 
                         {{-- Max Tempo --}}
 
@@ -169,6 +233,27 @@
                                 'id'          => 'max_tempo',
                                 'class'       => 'form-control',
                                 'placeholder' => '120',
+                            ])}}
+                        </div>
+                        @if ($errors->has('max_tempo'))
+                            <div class="form-group col-sm-12">
+                                <p class="error-message text-danger">{{ $errors->first('max_tempo') }}</p>
+                            </div>
+                        @endif
+
+                        {{-- Mode --}}
+
+                        <div class="form-group col-sm-12">
+                            {{Form::label('mode', 'Mode', [])}}
+                            <span class="badge badge-warning">任意</span>
+                            <small id="mode_help" class="form-text text-muted">
+                                曲の雰囲気
+                            </small>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            {{ Form::select('modes', [1 => '明るい', 0 => '暗い'], null, [
+                                'class'    => 'form-control',
+                                'placeholder' => '曲の雰囲気を選択してください'
                             ])}}
                         </div>
 
