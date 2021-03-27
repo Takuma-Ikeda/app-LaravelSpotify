@@ -32,28 +32,28 @@ class SpotifyService
     public function init(Request $req): SpotifyWebAPI
     {
         $this->auth($req->input('code'));
-        $this->getSpotifySession();
         return $this->getSpotifyWebAPI();
     }
 
-    public function execute(SpotifyWebAPI $api, string $web, array $data = []): array
+    public function execute(SpotifyWebAPI $api, string $web, array $data = [])
     {
         $result = [];
+
         switch ($web) {
             case Web::RecommendationStore:
                 $result = $this->getRecommendations($data, $api);
-                $userId = Auth::id();
-
-                /*
-                 * このタイミングで
-                 * conditions + user_id
-                 * recommendations + condition_id
-                 */
-
+                break;
+            case Web::PlaylistStore:
+                $playlistId = $this->createPlaylist($data, $api);
+                $result = $this->addPlaylistTracks($playlistId, $data, $api);
+                break;
+            case Web::PlaylistDestroy:
+                $playlistId = $this->unfollowPlaylist($data, $api);
                 break;
             case Web::GenreCreate:
                 $genre = new Genre();
                 $genre->createBySeeds($api);
+                $result[] = true;
                 break;
         }
         return $result;
@@ -130,6 +130,29 @@ class SpotifyService
         return $result;
     }
 
+
+    private function createPlaylist(array $data, SpotifyWebAPI $api): string
+    {
+        $result = $api->createPlaylist([
+            'name' => $data['playlist_name']
+        ]);
+        return $result->id;
+    }
+
+    private function addPlaylistTracks(string $playlistId, array $data, SpotifyWebAPI $api): array
+    {
+        $api->addPlaylistTracks(
+            $playlistId,
+            $data['uris'],
+        );
+        return ['playlist_uri' => $this->idToUri($playlistId, 'playlist')];
+    }
+
+    private function unfollowPlaylist(array $data, SpotifyWebAPI $api): bool
+    {
+        return $api->unfollowPlaylist($data['uri']);
+    }
+
     private function parseSeeds(array $seeds, string $type): array
     {
         foreach ($seeds as $index => $seed) {
@@ -139,5 +162,20 @@ class SpotifyService
             }
         }
         return $seeds;
+    }
+
+    private function idToUri($ids, $type)
+    {
+        $type = 'spotify:' . $type . ':';
+
+        $ids = array_map(function ($id) use ($type) {
+            if (substr($id, 0, strlen($type)) != $type && substr($id, 0, 7) != 'spotify') {
+                $id = $type . $id;
+            }
+
+            return $id;
+        }, (array) $ids);
+
+        return count($ids) == 1 ? $ids[0] : $ids;
     }
 }

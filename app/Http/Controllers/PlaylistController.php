@@ -6,6 +6,7 @@ use App\Enums\Web;
 use App\Facades\Spotify;
 use App\Models\Genre;
 use App\Services\SpotifyService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use SpotifyWebAPI\Request as SpotifyRequest;
@@ -21,13 +22,11 @@ class PlaylistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $genres = [];
-        foreach (Genre::all() as $genre) {
-            $genres[] = $genre->name;
-        }
-        return view('playlist', compact('genres'));
+        $result = $req->input('result');
+        $playlistUri = $result['playlist_uri'];
+        return view('playlist', compact('playlistUri'));
     }
 
     /**
@@ -47,7 +46,25 @@ class PlaylistController extends Controller
      */
     public function store(Request $req)
     {
-        //
+        $uris = [];
+        $playlistName = $req->input('playlist_name');
+
+        foreach (range(1, $req->input('limit')) as $i) {
+            $uris[] = $req->input('uri_' . $i);
+        }
+
+        if (empty($playlistName)) {
+            $playlistName = '' . Carbon::now();
+        }
+
+        session([
+            'web'  => Web::PlaylistStore,
+            'data' => [
+                'playlist_name' => $playlistName,
+                'uris' => $uris,
+            ],
+        ]);
+        Spotify::init($req);
     }
 
     /**
@@ -87,11 +104,17 @@ class PlaylistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $uri
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $req, string $uri)
     {
-        //
+        session([
+            'web'  => Web::PlaylistDestroy,
+            'data' => [
+                'uri' => $uri,
+            ],
+        ]);
+        Spotify::init($req);
     }
 }
