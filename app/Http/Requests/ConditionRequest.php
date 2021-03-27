@@ -11,7 +11,7 @@ class ConditionRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,25 +21,21 @@ class ConditionRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
-        return [
-            'seed_artists_1' => 'nullable|string',
-            'seed_artists_2' => 'nullable|string',
-            'seed_artists_3' => 'nullable|string',
-            'seed_artists_4' => 'nullable|string',
-            'seed_artists_5' => 'nullable|string',
-            'seed_tracks_1'  => 'nullable|string',
-            'seed_tracks_2'  => 'nullable|string',
-            'seed_tracks_3'  => 'nullable|string',
-            'seed_tracks_4'  => 'nullable|string',
-            'seed_tracks_5'  => 'nullable|string',
+        $rules = [
             'seed_genres'    => 'nullable|string',
             'limit'          => 'nullable|integer',
             'min_tempo'      => 'nullable|integer',
             'max_tempo'      => 'nullable|integer',
             'modes'          => 'nullable|integer',
         ];
+
+        foreach (range(1, 5) as $i) {
+            $rules['seed_artists_' . $i] = 'nullable|string';
+            $rules['seed_tracks_' . $i] = 'nullable|string';
+        }
+        return $rules;
     }
 
     /**
