@@ -13,6 +13,11 @@
 - `Redirect URLs` は `ドメイン/result/` にする
     - たとえばローカルだったら `http://localhost/result/` にする
 
+## ジャンルを取得する
+
+- `ドメイン/genre/` にアクセスして `genres` テーブルにレコードを追加しておく
+    - たとえばローカルだったら `http://localhost/genre/create/` にアクセスする
+
 ## .env 設定
 
 - YOUR_CLIENT_ID
