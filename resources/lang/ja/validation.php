@@ -112,6 +112,7 @@ return [
     'unique'               => ':attributeの値は既に存在しています。',
     'uploaded'             => ':attributeのアップロードに失敗しました。',
     'url'                  => ':attributeに正しい形式を指定してください。',
+    'seeds_more_than_five' => 'Seedデータは6つ以上組み合わせることができません',
 
     /*
     |--------------------------------------------------------------------------
@@ -141,6 +142,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'limit'     => '曲数',
+        'min_tempo' => '最低テンポ',
+        'max_tempo' => '最大テンポ',
+    ],
 
 ];

@@ -7,6 +7,21 @@
 @section('content')
 <div class="container">
 
+@if ($result['error'])
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">{{ __('recomendation.error') }}</div>
+            <div class="card-body">
+                <p><a href="{{ url('/') }}">back</a></p>
+                <div class="form-group col-sm-12">
+                    <p class="error-message text-danger">{{ $result['error'] }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@else
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -62,7 +77,7 @@
                             {{ Form::text('playlist_name', null, [
                                 'id'          => 'playlist_name',
                                 'class'       => 'form-control',
-                                'placeholder' => {{ __('recomendation.playlist_name.placeholder') }},
+                                'placeholder' => __('recomendation.playlist_name.placeholder'),
                             ])}}
                         </div>
 
@@ -78,4 +93,6 @@
         </div>
     </div>
 </div>
+@endif
+
 @endsection

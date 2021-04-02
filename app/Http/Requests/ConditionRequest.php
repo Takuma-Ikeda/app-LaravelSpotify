@@ -33,7 +33,7 @@ class ConditionRequest extends FormRequest
 
         foreach (range(1, 5) as $i) {
             $rules['seed_artists_' . $i] = 'nullable|string';
-            $rules['seed_tracks_' . $i] = 'nullable|string';
+            $rules['seed_tracks_'  . $i] = 'nullable|string';
         }
         return $rules;
     }
@@ -55,11 +55,11 @@ class ConditionRequest extends FormRequest
             $seeds[] = $this->input('seed_genres');
             foreach (range(1, 5) as $i) {
                 $seeds[] = $this->input('seed_artists_' . $i);
-                $seeds[] = $this->input('seed_tracks_' . $i);
+                $seeds[] = $this->input('seed_tracks_'  . $i);
             }
             // 5 個以上 seed がある場合はエラー
             if (count(array_filter($seeds)) > 5) {
-                $validator->errors()->add('seed', 'Seedデータは6つ以上組み合わせることができません');
+                $validator->errors()->add('seed', __('validation.seeds_more_than_five'));
             }
         });
     }

@@ -4,9 +4,20 @@
 - PHP 7.3.25
 - MySQL 8.0.16
 
-## ルーティング
+# 使い方
 
-- http://localhost/
+## Spotify for Developers
+
+- https://developer.spotify.com/dashboard/login
+- アプリを作成
+- `Redirect URLs` は `ドメイン/result/` にする
+    - たとえばローカルだったら `http://localhost/result/` にする
+
+## .env 設定
+
+- YOUR_CLIENT_ID
+- YOUR_CLIENT_SECRET
+- YOUR_REDIRECT_URI
 
 ## 開発メモ
 

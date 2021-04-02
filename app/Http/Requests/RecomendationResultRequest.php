@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResultRequest extends FormRequest
+class RecomendationResultRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class ResultRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'auth' => 'nullable|string',
+            'result'       => 'required|array',
+            'result.error' => 'nullable|string',
+            'result.song'  => 'nullable|string',
+            'result.uri'   => 'nullable|string',
         ];
     }
 

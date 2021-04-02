@@ -111,15 +111,21 @@ class SpotifyService
         $seedArtists = $this->parseSeeds($seedArtists, 'spotify:artist:');
         $seedTracks = $this->parseSeeds($seedTracks, 'spotify:track:');
 
-        $recommendations = $api->getRecommendations([
-            'limit'        => $data['limit'],
-            'seed_artists' => $seedArtists,
-            'seed_genres'  => $data['seed_genres'],
-            'seed_tracks'  => $seedTracks,
-            'min_tempo'    => $data['min_tempo'],
-            'max_tempo'    => $data['max_tempo'],
-            'mode'         => $data['mode'],
-        ]);
+        try {
+            $recommendations = $api->getRecommendations([
+                'limit'        => $data['limit'],
+                'seed_artists' => $seedArtists,
+                'seed_genres'  => $data['seed_genres'],
+                'seed_tracks'  => $seedTracks,
+                'min_tempo'    => $data['min_tempo'],
+                'max_tempo'    => $data['max_tempo'],
+                'mode'         => $data['mode'],
+            ]);
+        } catch (\Exception $e) {
+            $result['error'] = $e->getMessage();
+            return $result;
+        }
+
 
         $tracks = $recommendations->tracks;
         foreach ($tracks as $t) {

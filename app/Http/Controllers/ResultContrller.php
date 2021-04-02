@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\Web;
 use App\Facades\Spotify;
+use App\Http\Requests\ResultRequest;
 use App\Services\SpotifyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class ResultContrller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index(ResultRequest $req)
     {
         $api = Spotify::init($req);
         $web = session('web');
@@ -40,9 +41,8 @@ class ResultContrller extends Controller
                     return redirect()->route('playlist.index', ['result' => $result]);
                     break;
                 case Web::PlaylistDestroy:
-                    return redirect()->route('condition.index');
-                    break;
                 case Web::GenreCreate:
+                    return redirect()->route('condition.index');
                     break;
             }
         }

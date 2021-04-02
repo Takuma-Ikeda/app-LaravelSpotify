@@ -21,6 +21,8 @@ class Genre extends Model
 
     public function createBySeeds(SpotifyWebAPI $api): void
     {
+        // まずテーブルを初期化する
+        self::truncate();
         $genres = $api->getGenreSeeds()->genres;
         foreach ($genres as $seed) {
             self::create([

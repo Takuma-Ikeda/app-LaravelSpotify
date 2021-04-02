@@ -15,6 +15,7 @@ return [
 
     'condition' => 'おすすめ条件設定',
     'result'    => 'おすすめ取得結果',
+    'error'     => 'おすすめ取得エラー',
     'number'    => '#',
     'name'      => '曲名',
     'uri'       => 'URI',

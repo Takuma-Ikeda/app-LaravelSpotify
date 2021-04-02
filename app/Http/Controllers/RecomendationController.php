@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\Web;
 use App\Facades\Spotify;
-use App\Http\Requests\ResultRequest;
+use App\Http\Requests\RecomendationResultRequest;
 use App\Models\Genre;
 use App\Services\SpotifyService;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class RecomendationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ResultRequest $req)
+    public function index(RecomendationResultRequest $req)
     {
         $result = $req->validated()['result'];
         return view('recomendation', compact('result'));
