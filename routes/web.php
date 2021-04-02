@@ -44,12 +44,6 @@ Route::group(['middleware' => ['auth']], function () {
         ]
     ]);
 
-    Route::group(['prefix' => 'result'], function() {
-        Route::resource('/', ResultContrller::class);
-    });
-
-
-    Route::group(['prefix' => 'genre'], function() {
-        Route::resource('/', GenreSeedsController::class);
-    });
+    Route::resource('/result', ResultContrller::class);
+    Route::resource('/genre', GenreSeedsController::class);
 });
