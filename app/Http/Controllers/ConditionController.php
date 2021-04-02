@@ -25,10 +25,11 @@ class ConditionController extends Controller
     public function index()
     {
         $genres = [];
+        $limit = 10; // 初期値
         foreach (Genre::all() as $genre) {
             $genres[] = $genre->name;
         }
-        return view('condition', compact('genres'));
+        return view('condition', compact('genres', 'limit'));
     }
 
     /**

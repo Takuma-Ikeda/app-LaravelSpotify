@@ -16,9 +16,9 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">曲名</th>
-                                <th scope="col">URI</th>
+                                <th scope="col">{{ __('recomendation.number') }}</th>
+                                <th scope="col">{{ __('recomendation.name') }}</th>
+                                <th scope="col">{{ __('recomendation.uri') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,38 +41,38 @@
             <div class="card">
                 <div class="card-header">{{ __('playlist.create_title') }}</div>
                 <div class="card-body">
-                    {{Form::open(['route' => ['playlist.store']])}}
+                    {{ Form::open(['route' => ['playlist.store']]) }}
 
-                        {{Form::token()}}
-                        {{Form::hidden('limit', count($result))}}
+                        {{ Form::token() }}
+                        {{ Form::hidden('limit', count($result)) }}
                         @foreach ($result as $r)
-                            {{Form::hidden('uri_' . ($loop->index + 1), $r['uri'])}}
+                            {{ Form::hidden('uri_' . ($loop->index + 1), $r['uri']) }}
                         @endforeach
 
                         {{-- Playlist Name --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('playlist_name','Playlist Name', [])}}
-                            <span class="badge badge-danger">必須</span>
+                            {{ Form::label('playlist_name','Playlist Name', []) }}
+                            <span class="badge badge-danger">{{ __('mandatory') }}</span>
                             <small id="playlist_name_help" class="form-text text-muted">
-                                未入力の場合、現在日時がプレイリスト名になります
+                                {{ __('recomendation.playlist_name.tips') }}
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('playlist_name', null, [
+                            {{ Form::text('playlist_name', null, [
                                 'id'          => 'playlist_name',
                                 'class'       => 'form-control',
-                                'placeholder' => 'プレイリスト名',
+                                'placeholder' => {{ __('recomendation.playlist_name.placeholder') }},
                             ])}}
                         </div>
 
                         <div class="form-group col-sm-12">
-                            {{Form::submit('Submit', [
+                            {{ Form::submit('Submit', [
                                 'class' => 'btn btn-primary my-1'
                             ])}}
                         </div>
 
-                    {{Form::close()}}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

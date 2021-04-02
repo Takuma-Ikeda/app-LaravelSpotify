@@ -15,4 +15,11 @@ return [
 
     'condition' => 'おすすめ条件設定',
     'result'    => 'おすすめ取得結果',
+    'number'    => '#',
+    'name'      => '曲名',
+    'uri'       => 'URI',
+    'playlist_name' => [
+        'tips' => '未入力の場合、現在日時がプレイリスト名になります',
+        'placeholder' => 'プレイリスト名'
+    ],
 ];

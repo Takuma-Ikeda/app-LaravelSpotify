@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-<title>{{ __('recomendation.condition') }}</title>
+<title>{{ __('condition.title') }}</title>
 @endsection
 
 @section('content')
@@ -9,15 +9,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('recomendation.condition') }}</div>
+                <div class="card-header">{{ __('condition.header') }}</div>
 
                 <div class="card-body">
-                    {{Form::open(['route' => ['condition.store']])}}
+                    {{ Form::open(['route' => ['condition.store']]) }}
 
-                        {{Form::token()}}
+                        {{ Form::token() }}
 
                         <div class="form-group col-sm-12">
-                            <p class="text-info">Seed Genres・Seed Artists・Seed Tracks を最大 5 つまで組み合わせてください</p>
+                            <p class="text-info">{{ __('condition.info') }}</p>
                         </div>
 
                         @if ($errors->has('seed'))
@@ -29,58 +29,58 @@
                         {{-- Seed Genres --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('seed_genres', 'Seed Genres', [])}}
-                            <span class="badge badge-danger">必須</span>
+                            {{ Form::label('seed_genres', 'Seed Genres', []) }}
+                            <span class="badge badge-danger">{{ __('mandatory') }}</span>
                             <small id="seed_artists_help" class="form-text text-muted">
-                                ジャンル
+                            {{ __('condition.gunre.tips') }}
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
                             {{ Form::select('seed_genres', $genres, old('id'), [
                                 'class'    => 'form-control',
-                                'placeholder' => 'ジャンルを選択してください'
+                                'placeholder' =>  __('condition.gunre.placeholder')
                             ])}}
                         </div>
 
                         {{-- Seed Artists --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('seed_artists_1','Seed Artists', [])}}
-                            <span class="badge badge-danger">必須</span>
+                            {{ Form::label('seed_artists_1','Seed Artists', []) }}
+                            <span class="badge badge-danger">{{ __('mandatory') }}</span>
                             <small id="seed_artists_help" class="form-text text-muted">
-                                アーティスト名 Spotify URI
+                                {{ __('condition.seed_artists.tips') }}
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_1', 'spotify:artist:61VIpi1GmB7bTL3DCGWSlm', [
+                            {{ Form::text('seed_artists_1', 'spotify:artist:61VIpi1GmB7bTL3DCGWSlm', [
                                 'id'          => 'seed_artists_1',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:61VIpi1GmB7bTL3DCGWSlm',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_2', 'spotify:artist:4YXWn3AKqmiHMai9dZWuWK', [
+                            {{ Form::text('seed_artists_2', 'spotify:artist:4YXWn3AKqmiHMai9dZWuWK', [
                                 'id'          => 'seed_artists_2',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:4YXWn3AKqmiHMai9dZWuWK',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_3', 'spotify:artist:7nDfh01E30OkhgsPKSQzCx', [
+                            {{ Form::text('seed_artists_3', 'spotify:artist:7nDfh01E30OkhgsPKSQzCx', [
                                 'id'          => 'seed_artists_3',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:7nDfh01E30OkhgsPKSQzCx',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_4', 'spotify:artist:4frHeZ2ummtLwkuV7QohYp', [
+                            {{ Form::text('seed_artists_4', 'spotify:artist:4frHeZ2ummtLwkuV7QohYp', [
                                 'id'          => 'seed_artists_4',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:4frHeZ2ummtLwkuV7QohYp',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_artists_5', 'spotify:artist:0Gvw849iPccKI428txR3yP', [
+                            {{ Form::text('seed_artists_5', 'spotify:artist:0Gvw849iPccKI428txR3yP', [
                                 'id'          => 'seed_artists_5',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:0Gvw849iPccKI428txR3yP',
@@ -90,42 +90,42 @@
                         {{-- Seed Tracks --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('seed_tracks_1', 'Seed Tracks', [])}}
-                            <span class="badge badge-danger">必須</span>
+                            {{ Form::label('seed_tracks_1', 'Seed Tracks', []) }}
+                            <span class="badge badge-danger">{{ __('mandatory') }}</span>
                             <small id="seed_tracks_help" class="form-text text-muted">
-                                曲名 Spotify URI
+                                {{ __('condition.seed_tracks.tips') }}
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_1', 'spotify:track:6ZtpesFDroMHMM8CG5LlhZ', [
+                            {{ Form::text('seed_tracks_1', 'spotify:track:6ZtpesFDroMHMM8CG5LlhZ', [
                                 'id'          => 'seed_tracks_1',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:6ZtpesFDroMHMM8CG5LlhZ',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_2', 'spotify:track:2yA4JMxbVHBBzMbKmVHH1s', [
+                            {{ Form::text('seed_tracks_2', 'spotify:track:2yA4JMxbVHBBzMbKmVHH1s', [
                                 'id'          => 'seed_tracks_2',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:2yA4JMxbVHBBzMbKmVHH1s',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_3', 'spotify:track:0QMqvJp8SZsjmGQJnMD9N0', [
+                            {{ Form::text('seed_tracks_3', 'spotify:track:0QMqvJp8SZsjmGQJnMD9N0', [
                                 'id'          => 'seed_tracks_3',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:0QMqvJp8SZsjmGQJnMD9N0',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_4', 'spotify:track:5HkpiHbmgH87yJwIGlS6ye', [
+                            {{ Form::text('seed_tracks_4', 'spotify:track:5HkpiHbmgH87yJwIGlS6ye', [
                                 'id'          => 'seed_tracks_4',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:5HkpiHbmgH87yJwIGlS6ye',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('seed_tracks_5', 'spotify:track:6BURi8BvCkyFUKMQnmxjFg', [
+                            {{ Form::text('seed_tracks_5', 'spotify:track:6BURi8BvCkyFUKMQnmxjFg', [
                                 'id'          => 'seed_tracks_5',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:6BURi8BvCkyFUKMQnmxjFg',
@@ -183,14 +183,14 @@
                         {{-- Limit --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('limit','Limit', [])}}
-                            <span class="badge badge-warning">任意</span>
+                            {{ Form::label('limit','Limit', []) }}
+                            <span class="badge badge-warning">{{ __('optional') }}</span>
                             <small id="limit" class="form-text text-muted">
-                                曲数 ※ 最大値 20
+                                {{ __('condition.limit.tips') }}
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('limit', '10', [
+                            {{ Form::text('limit', $limit, [
                                 'id'    => 'limit',
                                 'class' => 'form-control',
                             ])}}
@@ -204,14 +204,14 @@
                         {{-- Min Tempo --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('min_tempo', 'Min Tempo', [])}}
-                            <span class="badge badge-warning">任意</span>
+                            {{ Form::label('min_tempo', 'Min Tempo', []) }}
+                            <span class="badge badge-warning">{{ __('optional') }}</span>
                             <small id="min_tempo_help" class="form-text text-muted">
-                                最低テンポ
+                                {{ __('condition.min_tempo.tips') }}
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('min_tempo', '', [
+                            {{ Form::text('min_tempo', '', [
                                 'id'          => 'min_tempo',
                                 'class'       => 'form-control',
                                 'placeholder' => '80',
@@ -226,14 +226,14 @@
                         {{-- Max Tempo --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('max_tempo', 'Max Tempo', [])}}
-                            <span class="badge badge-warning">任意</span>
+                            {{ Form::label('max_tempo', 'Max Tempo', []) }}
+                            <span class="badge badge-warning">{{ __('optional') }}</span>
                             <small id="max_tempo_help" class="form-text text-muted">
-                                最大テンポ
+                                {{ __('condition.max_tempo.tips') }}
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{Form::text('max_tempo', '', [
+                            {{ Form::text('max_tempo', '', [
                                 'id'          => 'max_tempo',
                                 'class'       => 'form-control',
                                 'placeholder' => '120',
@@ -248,16 +248,16 @@
                         {{-- Mode --}}
 
                         <div class="form-group col-sm-12">
-                            {{Form::label('mode', 'Mode', [])}}
-                            <span class="badge badge-warning">任意</span>
+                            {{ Form::label('mode', 'Mode', []) }}
+                            <span class="badge badge-warning">{{ __('optional') }}</span>
                             <small id="mode_help" class="form-text text-muted">
-                                曲の雰囲気
+                                {{ __('condition.mode.tips') }}
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::select('modes', [1 => '明るい', 0 => '暗い'], null, [
+                            {{ Form::select('modes', [1 => __('condition.mode.major'), 0 => __('condition.mode.minor')], null, [
                                 'class'    => 'form-control',
-                                'placeholder' => '曲の雰囲気を選択してください'
+                                'placeholder' => __('condition.mode.placeholder')
                             ])}}
                         </div>
 
@@ -267,7 +267,7 @@
                             ])}}
                         </div>
 
-                    {{Form::close()}}
+                    {{ Form::close() }}
 
                 </div>
             </div>
