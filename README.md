@@ -21,7 +21,16 @@
 
 ## 開発メモ
 
-### 認証機能作成
+```sh
+php artisan migrate
+composer install
+npm i
+npm run dev
+```
+
+### Laravel UI
+
+- https://github.com/laravel/ui
 
 ```sh
 composer require laravel/ui
@@ -39,11 +48,15 @@ npm run dev
 
 ### Guzzle HTTP
 
+- https://github.com/guzzle/guzzle
+
 ```sh
 composer require guzzlehttp/guzzle
 ```
 
 ### Spotify Web API PHP
+
+- https://github.com/jwilsson/spotify-web-api-php
 
 ```sh
 composer require jwilsson/spotify-web-api-php

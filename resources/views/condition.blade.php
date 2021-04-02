@@ -52,35 +52,35 @@
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_artists_1', 'spotify:artist:61VIpi1GmB7bTL3DCGWSlm', [
+                            {{ Form::text('seed_artists_1', '', [
                                 'id'          => 'seed_artists_1',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:61VIpi1GmB7bTL3DCGWSlm',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_artists_2', 'spotify:artist:4YXWn3AKqmiHMai9dZWuWK', [
+                            {{ Form::text('seed_artists_2', '', [
                                 'id'          => 'seed_artists_2',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:4YXWn3AKqmiHMai9dZWuWK',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_artists_3', 'spotify:artist:7nDfh01E30OkhgsPKSQzCx', [
+                            {{ Form::text('seed_artists_3', '', [
                                 'id'          => 'seed_artists_3',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:7nDfh01E30OkhgsPKSQzCx',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_artists_4', 'spotify:artist:4frHeZ2ummtLwkuV7QohYp', [
+                            {{ Form::text('seed_artists_4', '', [
                                 'id'          => 'seed_artists_4',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:4frHeZ2ummtLwkuV7QohYp',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_artists_5', 'spotify:artist:0Gvw849iPccKI428txR3yP', [
+                            {{ Form::text('seed_artists_5', '', [
                                 'id'          => 'seed_artists_5',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:artist:0Gvw849iPccKI428txR3yP',
@@ -97,35 +97,35 @@
                             </small>
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_tracks_1', 'spotify:track:6ZtpesFDroMHMM8CG5LlhZ', [
+                            {{ Form::text('seed_tracks_1', '', [
                                 'id'          => 'seed_tracks_1',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:6ZtpesFDroMHMM8CG5LlhZ',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_tracks_2', 'spotify:track:2yA4JMxbVHBBzMbKmVHH1s', [
+                            {{ Form::text('seed_tracks_2', '', [
                                 'id'          => 'seed_tracks_2',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:2yA4JMxbVHBBzMbKmVHH1s',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_tracks_3', 'spotify:track:0QMqvJp8SZsjmGQJnMD9N0', [
+                            {{ Form::text('seed_tracks_3', '', [
                                 'id'          => 'seed_tracks_3',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:0QMqvJp8SZsjmGQJnMD9N0',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_tracks_4', 'spotify:track:5HkpiHbmgH87yJwIGlS6ye', [
+                            {{ Form::text('seed_tracks_4', '', [
                                 'id'          => 'seed_tracks_4',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:5HkpiHbmgH87yJwIGlS6ye',
                             ])}}
                         </div>
                         <div class="form-group col-sm-12">
-                            {{ Form::text('seed_tracks_5', 'spotify:track:6BURi8BvCkyFUKMQnmxjFg', [
+                            {{ Form::text('seed_tracks_5', '', [
                                 'id'          => 'seed_tracks_5',
                                 'class'       => 'form-control',
                                 'placeholder' => 'spotify:track:6BURi8BvCkyFUKMQnmxjFg',
