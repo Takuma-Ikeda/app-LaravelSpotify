@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
 
-@if ($result['error'])
+@if (isset($result['error']))
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
